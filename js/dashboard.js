@@ -14,7 +14,7 @@ const dom = {
   chatSendButton: document.getElementById('chatSendButton')
 };
 
-const chartContext = dom.chartCanvas ? dom.chartCanvas.getContext('2d') : null;
+const chartContext = dom.chartCanvas.getContext('2d');
 let activeChart;
 
 const dataSets = {
@@ -24,9 +24,8 @@ const dataSets = {
 };
 
 function buildChart(period) {
-  if (!chartContext || typeof Chart === 'undefined') return;
   if (activeChart) activeChart.destroy();
-  const d = dataSets[period] || dataSets['3m'];
+  const d = dataSets[period];
 
   activeChart = new Chart(chartContext, {
     type: 'line',
@@ -37,7 +36,15 @@ function buildChart(period) {
         { label: 'EXPENSES', data: d.expenses, borderColor: '#FF4444', backgroundColor: 'rgba(255,68,68,0.02)', borderWidth: 2, fill: true, tension: 0.3 }
       ]
     },
-    options: { responsive: true, maintainAspectRatio: true }
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: { legend: { labels: { color: '#7FB07F' } } },
+      scales: {
+        y: { ticks: { color: '#7FB07F', callback: (v) => `${(v / 1e3).toFixed(0)}k` }, grid: { color: '#1A2A1A' } },
+        x: { ticks: { color: '#7FB07F' }, grid: { color: '#1A2A1A' } }
+      }
+    }
   });
 }
 
@@ -49,10 +56,10 @@ function switchTab(tabElement) {
 }
 
 function simulateScan() {
-  if (!dom.dropArea || !dom.scanLoading || !dom.scanResult) return;
   dom.dropArea.style.display = 'none';
   dom.scanLoading.style.display = 'block';
   dom.scanResult.style.display = 'none';
+
   setTimeout(() => {
     dom.scanLoading.style.display = 'none';
     dom.scanResult.style.display = 'block';
@@ -61,42 +68,70 @@ function simulateScan() {
 }
 
 function sendMessage() {
-  if (!dom.chatInput || !dom.chatMessages) return;
   const msg = dom.chatInput.value.trim();
   if (!msg) return;
+
   dom.chatMessages.innerHTML += `<div class="msg user"><div class="msg-bubble">>_ ${msg}</div></div>`;
   dom.chatInput.value = '';
+
   setTimeout(() => {
-    dom.chatMessages.innerHTML += '<div class="msg ai"><div class="msg-bubble">>_ Réponse IA simulée.</div></div>';
+    let reply = '>_ Commande reconnue. Analyse en cours... (simulation IA)';
+
+    if (msg.toLowerCase().includes('tva')) {
+      reply = '>_ TVA collectée: 186 240 MAD, déductible: 63 400 MAD. Solde: 122 840 MAD.';
+    } else if (msg.toLowerCase().includes('flux')) {
+      reply = '>_ Prévision flux net Mai: +342 000 MAD. Confiance 89%.';
+    } else if (msg.toLowerCase().includes('facture')) {
+      reply = '>_ 8 factures impayées, total 394 800 MAD.';
+    }
+
+    dom.chatMessages.innerHTML += `<div class="msg ai"><div class="msg-bubble">${reply}</div></div>`;
     dom.chatMessages.scrollTop = dom.chatMessages.scrollHeight;
-  }, 450);
+  }, 600);
+}
+
+function askQuestion(q) {
+  dom.chatInput.value = q;
+  sendMessage();
+}
+
+function actionToast(msg) {
+  alert(`🔔 ${msg}`);
 }
 
 function toggleSidebar() {
-  if (dom.sidebar) dom.sidebar.classList.toggle('open');
+  dom.sidebar.classList.toggle('open');
 }
 
 function bindEvents() {
-  document.querySelectorAll('.tab').forEach((tab) => tab.addEventListener('click', () => switchTab(tab)));
-  if (dom.dropArea) {
-    dom.dropArea.addEventListener('click', simulateScan);
-    dom.dropArea.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        simulateScan();
-      }
-    });
-  }
-  if (dom.smartScanButton) dom.smartScanButton.addEventListener('click', simulateScan);
-  if (dom.scanAgainButton) dom.scanAgainButton.addEventListener('click', simulateScan);
-  if (dom.chatSendButton) dom.chatSendButton.addEventListener('click', sendMessage);
-  if (dom.chatInput) dom.chatInput.addEventListener('keydown', (event) => { if (event.key === 'Enter') sendMessage(); });
-  document.querySelectorAll('[data-question]').forEach((button) => button.addEventListener('click', () => {
-    if (dom.chatInput) dom.chatInput.value = button.dataset.question || '';
-    sendMessage();
-  }));
-  document.querySelectorAll('[data-action-msg]').forEach((button) => button.addEventListener('click', () => alert(`🔔 ${button.dataset.actionMsg}`)));
-  if (dom.sidebarToggle) dom.sidebarToggle.addEventListener('click', toggleSidebar);
+  document.querySelectorAll('.tab').forEach((tab) => {
+    tab.addEventListener('click', () => switchTab(tab));
+  });
+
+  dom.dropArea.addEventListener('click', simulateScan);
+  dom.dropArea.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      simulateScan();
+    }
+  });
+
+  dom.smartScanButton.addEventListener('click', simulateScan);
+  dom.scanAgainButton.addEventListener('click', simulateScan);
+  dom.chatSendButton.addEventListener('click', sendMessage);
+  dom.chatInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') sendMessage();
+  });
+
+  document.querySelectorAll('[data-question]').forEach((button) => {
+    button.addEventListener('click', () => askQuestion(button.dataset.question));
+  });
+
+  document.querySelectorAll('[data-action-msg]').forEach((button) => {
+    button.addEventListener('click', () => actionToast(button.dataset.actionMsg));
+  });
+
+  dom.sidebarToggle.addEventListener('click', toggleSidebar);
 }
 
 buildChart('3m');

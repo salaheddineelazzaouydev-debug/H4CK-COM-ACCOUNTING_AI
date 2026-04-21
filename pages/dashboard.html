@@ -3,93 +3,166 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>H4CK-COM Dashboard</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<title>H4CK-COM // AI Comptabilité Maroc</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@400;600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 <body>
+
+<!-- Sidebar (Hacker style) -->
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-logo">
     <div class="logo-icon">&lt;/&gt;</div>
-    <div class="logo-text">H4CK-COM<div class="logo-sub">AI :: ACCOUNTING</div></div>
-  </div>
-  <nav class="flex-grow-1">
-      <div class="sb-section">Général</div>
-      <ul class="nav flex-column">
-      <li><a href="dashboard.html" class="nav-link active"><i class="bi bi-speedometer2"></i><span>Tableau de bord</span></a></li>
-      <li><a href="analytics.html" class="nav-link"><i class="bi bi-graph-up"></i><span>Analytics</span></a></li>
-      </ul>
-      <div class="sb-section">Saisie</div>
-      <ul class="nav flex-column">
-      <li><a href="entries.html" class="nav-link"><i class="bi bi-pencil-square"></i><span>Écritures</span></a></li>
-      <li><a href="entry-create.html" class="nav-link"><i class="bi bi-plus-circle"></i><span>Nouvelle écriture</span></a></li>
-      <li><a href="reconcile.html" class="nav-link"><i class="bi bi-intersect"></i><span>Lettrage</span></a></li>
-      <li><a href="reconcile-history.html" class="nav-link"><i class="bi bi-archive"></i><span>Historique lettrages</span></a></li>
-      </ul>
-      <div class="sb-section">Plan comptable</div>
-      <ul class="nav flex-column">
-      <li><a href="accounts.html" class="nav-link"><i class="bi bi-diagram-3"></i><span>Comptes</span></a></li>
-      <li><a href="journals.html" class="nav-link"><i class="bi bi-journals"></i><span>Journaux</span></a></li>
-      <li><a href="partners.html" class="nav-link"><i class="bi bi-people"></i><span>Tiers</span></a></li>
-      </ul>
-      <div class="sb-section">TVA</div>
-      <ul class="nav flex-column">
-      <li><a href="tva-auto.html" class="nav-link"><i class="bi bi-calculator"></i><span>Calcul auto N°074</span></a></li>
-      <li><a href="vat-declarations.html" class="nav-link"><i class="bi bi-file-earmark-text"></i><span>Déclarations TVA</span></a></li>
-      <li><a href="n074-export.html" class="nav-link"><i class="bi bi-file-earmark-excel"></i><span>Export N°074</span></a></li>
-      <li><a href="vat-rates.html" class="nav-link"><i class="bi bi-percent"></i><span>Taux TVA</span></a></li>
-      </ul>
-      <div class="sb-section">Obligations fiscales</div>
-      <ul class="nav flex-column">
-      <li><a href="fiscal-dashboard.html" class="nav-link"><i class="bi bi-calendar2-check"></i><span>Tableau fiscal</span></a></li>
-      <li><a href="fiscal-list.html" class="nav-link"><i class="bi bi-list-check"></i><span>Toutes les déclarations</span></a></li>
-      </ul>
-      <div class="sb-section">États financiers</div>
-      <ul class="nav flex-column">
-      <li><a href="balance.html" class="nav-link"><i class="bi bi-table"></i><span>Balance générale</span></a></li>
-      <li><a href="grand-livre.html" class="nav-link"><i class="bi bi-journal-richtext"></i><span>Grand Livre</span></a></li>
-      <li><a href="bilan.html" class="nav-link"><i class="bi bi-bar-chart-line"></i><span>Bilan</span></a></li>
-      <li><a href="cpc.html" class="nav-link"><i class="bi bi-graph-up-arrow"></i><span>CPC</span></a></li>
-      <li><a href="esg.html" class="nav-link"><i class="bi bi-grid-3x3"></i><span>ESG</span></a></li>
-      </ul>
-      <div class="sb-section">Agent IA</div>
-      <ul class="nav flex-column">
-      <li><a href="assistant-ia.html" class="nav-link"><i class="bi bi-robot"></i><span>Assistant IA</span></a></li>
-      <li><a href="ai-reports.html" class="nav-link"><i class="bi bi-stars"></i><span>Rapports</span></a></li>
-      <li><a href="invoice-processing.html" class="nav-link"><i class="bi bi-file-earmark-arrow-up"></i><span>Traitement factures</span></a></li>
-      </ul>
-      <div class="sb-section">Paramètres</div>
-      <ul class="nav flex-column">
-      <li><a href="fiscal-years.html" class="nav-link"><i class="bi bi-calendar3"></i><span>Exercices fiscaux</span></a></li>
-      <li><a href="analytic-axis.html" class="nav-link"><i class="bi bi-layers"></i><span>Comptabilité analytique</span></a></li>
-      <li><a href="currencies.html" class="nav-link"><i class="bi bi-currency-exchange"></i><span>Devises</span></a></li>
-      </ul>
-      </nav>
-  <div class="sidebar-footer"><div class="ai-status"><div class="ai-dot"></div><div class="ai-status-text"><strong>AI ACTIVE</strong><br>14 agents · 99.2% uptime</div></div></div>
-</aside>
-<div class="main-wrapper">
-<header class="topbar"><button class="hamburger" id="sidebarToggle" aria-label="Toggle sidebar" type="button">☰</button><div class="topbar-title">H4CK-<span>COM</span> :: ACCOUNTING_AI</div><div class="search-bar"><input type="text" placeholder="[ search... ]"></div></header>
-<main class="page-content"><div class="welcome-banner glitch-hover"><div><div class="welcome-title">>_ TABLEAU DE BORD</div><div class="welcome-ai-summary"><span class="ai-chip">FAKE DATA</span> Données de démonstration pour la page Tableau de bord.</div></div><div><button class="btn-primary" type="button">ACTION</button></div></div>
-    <div class="kpi-grid">
-      <div class="kpi-card"><div>INDICATEUR A</div><div class="kpi-value">1,248,920 MAD</div><div class="kpi-change up">▲ +8.2%</div></div>
-      <div class="kpi-card"><div>INDICATEUR B</div><div class="kpi-value">428,100 MAD</div><div class="kpi-change down">▼ -2.1%</div></div>
-      <div class="kpi-card"><div>INDICATEUR C</div><div class="kpi-value">96.3%</div><div class="kpi-change up">▲ +0.7%</div></div>
-      <div class="kpi-card"><div>INDICATEUR D</div><div class="kpi-value">74</div><div class="kpi-change up">▲ +5</div></div>
+    <div class="logo-text">
+      H4CK-COM
+      <div class="logo-sub">AI :: ACCOUNTING</div>
     </div>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-label">[ NAVIGATION ]</div>
+    <a class="nav-item active" href="#">
+      <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      DASHBOARD
+    </a>
+    <a class="nav-item" href="#">
+      <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+      TRANSACTIONS
+      <span class="nav-badge">47</span>
+    </a>
+    <a class="nav-item" href="#">
+      <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+      INVOICES
+      <span class="nav-badge">8</span>
+    </a>
+    <a class="nav-item" href="#">
+      <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+      AI INSIGHTS
+    </a>
+  </div>
+  <div class="sidebar-footer">
+    <div class="ai-status">
+      <div class="ai-dot"></div>
+      <div class="ai-status-text">
+        <strong>AI ACTIVE</strong><br>14 agents · 99.2% uptime
+      </div>
+    </div>
+  </div>
+</aside>
+
+<div class="main-wrapper">
+  <header class="topbar">
+    <button class="hamburger" id="sidebarToggle" aria-label="Toggle sidebar" type="button">☰</button>
+    <div class="topbar-title">H4CK-<span>COM</span> :: ACCOUNTING_AI</div>
+    <div class="search-bar">
+      <svg width="12" height="12" fill="none" stroke="currentColor"><circle cx="10" cy="10" r="6"/><path d="M21 21l-6-6"/></svg>
+      <input type="text" placeholder="[ grep transactions... ]">
+    </div>
+    <div class="user-pill">
+      <div class="avatar">YB</div>
+      <div class="user-info"><div class="user-name">Yassine B.</div><div class="user-role">root@expert</div></div>
+    </div>
+  </header>
+
+  <main class="page-content">
+    <!-- Welcome banner with glitch -->
+    <div class="welcome-banner glitch-hover">
+      <div>
+        <div class="welcome-title">>_ SYSTEM READY, <span>YASSINE</span></div>
+        <div class="welcome-ai-summary">
+          <span class="ai-chip">AI</span> 23 invoices analyzed · 3 anomalies · TVA estimée: 186 240 MAD
+        </div>
+      </div>
+      <div><button class="btn-primary" id="smartScanButton" type="button">⟳ SMART SCAN</button></div>
+    </div>
+
+    <!-- KPI cards -->
+    <div class="kpi-grid">
+      <div class="kpi-card"><div>REVENUES</div><div class="kpi-value">2,847,350 MAD</div><div class="kpi-change up">▲ +12.4%</div><div class="kpi-progress"><div class="kpi-progress-fill" style="width:72%"></div></div></div>
+      <div class="kpi-card"><div>PENDING INVOICES</div><div class="kpi-value">394,800 MAD</div><div class="kpi-change down">▼ 8 invoices</div><div class="kpi-progress"><div class="kpi-progress-fill" style="width:28%"></div></div></div>
+      <div class="kpi-card"><div>AI CONFIDENCE</div><div class="kpi-value">97.4%</div><div class="kpi-change up">▲ +1.2%</div><div class="kpi-progress"><div class="kpi-progress-fill" style="width:97%"></div></div></div>
+      <div class="kpi-card"><div>MONTHLY EXPENSES</div><div class="kpi-value">1,124,690 MAD</div><div class="kpi-change down">▼ +6.8%</div><div class="kpi-progress"><div class="kpi-progress-fill" style="width:59%"></div></div></div>
+    </div>
+
+    <!-- Chart + Smart Scan -->
+    <div class="middle-grid">
+      <div class="chart-card">
+        <div class="card-header">
+          <div><div class="card-title">CASHFLOW PREDICTION</div><div class="chart-subtitle">AI-powered forecast</div></div>
+          <div class="chart-tabs"><div class="tab active" data-period="3m">3M</div><div class="tab" data-period="6m">6M</div><div class="tab" data-period="1y">1Y</div></div>
+        </div>
+        <canvas id="revenueChart" height="200"></canvas>
+      </div>
+      <div class="ai-scan-card">
+        <div class="card-title">⟁ AI SCAN v2.0</div>
+        <div class="scan-drop-area" id="dropArea" role="button" tabindex="0">
+          <div class="scan-icon">📄</div>
+          <div>Drop invoice / click</div>
+          <div class="scan-hint">PDF, JPG, PNG</div>
+        </div>
+        <div id="scanLoading" style="display:none; text-align:center">[ SCANNING... ]<div class="blinking-cursor"></div></div>
+        <div id="scanResult" class="scan-result">
+          <div>📄 Maroc Telecom · 14,880 MAD</div>
+          <div>Confidence: 94%</div>
+          <button class="btn-primary" id="scanAgainButton" style="margin-top:8px" type="button">SCAN AGAIN</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transactions + AI Insights -->
     <div class="content-grid">
-      <div class="table-card"><div class="card-title">TABLEAU - Tableau de bord</div>
-      <table class="table-layout"><thead><tr><th>Réf</th><th>Description</th><th>Montant</th></tr></thead><tbody>
-      <tr><td>TX-001</td><td>Opération démo 1</td><td>14,880 MAD</td></tr>
-      <tr><td>TX-002</td><td>Opération démo 2</td><td>62,400 MAD</td></tr>
-      <tr><td>TX-003</td><td>Opération démo 3</td><td>8,200 MAD</td></tr>
-      </tbody></table></div>
-      <div class="insights-card"><div class="card-title">INSIGHTS IA</div><div class="insight-item">📈 Tendance positive simulée.</div><div class="insight-item">⚠️ Une anomalie simulée détectée.</div><div class="insight-item">🧾 Recommandation: vérifier les écritures de fin de mois.</div></div>
-    </div></main>
-<footer class="footer"><span>© 2026 H4CK-COM :: Moroccan AI Accounting</span><span class="footer-meta">[ demo fake data ]</span></footer>
+      <div class="table-card">
+        <div class="card-title">RECENT TRANSACTIONS (AUTO‑TAGGED)</div>
+        <table class="table-layout">
+          <thead><tr><th>ENTITY</th><th>AMOUNT</th><th>CATEGORY</th></tr></thead>
+          <tbody>
+            <tr><td>Maroc Telecom</td><td class="tx-amount debit">-14,880 MAD</td><td><span class="category-tag">📡 TELECOM</span></td></tr>
+            <tr><td>Attijariwafa Bank</td><td class="tx-amount credit">+580,000 MAD</td><td><span class="category-tag">🏦 BANK</span></td></tr>
+            <tr><td>ONEE</td><td class="tx-amount debit">-3,260 MAD</td><td><span class="category-tag">⚡ ENERGY</span></td></tr>
+            <tr><td>OCP Group</td><td class="tx-amount credit">+1,240,000 MAD</td><td><span class="category-tag">🤖 B2B</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="insights-card">
+        <div class="card-title">AI INSIGHTS</div>
+        <div class="insight-item">📈 Forecast: +342K MAD net next month</div>
+        <div class="insight-item">⚠️ Anomaly: RAM expense +340% above avg</div>
+        <div class="insight-item">🧾 VAT recoverable: 23,420 MAD</div>
+      </div>
+    </div>
+
+    <!-- Chat + Quick actions -->
+    <div class="chat-section">
+      <div class="chat-card">
+        <div class="card-title">AI ASSISTANT [TERMINAL]</div>
+        <div class="chat-messages" id="chatMessages">
+          <div class="msg ai"><div class="msg-bubble">>_ Bonjour Yassine. Je suis votre assistant comptable IA. Posez votre question.</div></div>
+        </div>
+        <div class="chat-suggestions">
+          <button class="chat-pill" type="button" data-question="TVA du mois ?">TVA</button>
+          <button class="chat-pill" type="button" data-question="Prédiction flux">PREDICTION</button>
+          <button class="chat-pill" type="button" data-question="Factures impayées">INVOICES</button>
+        </div>
+        <div class="chat-composer">
+          <input class="chat-input chat-input-flex" id="chatInput" placeholder=">_ " aria-label="Message assistant">
+          <button class="chat-send-btn" id="chatSendButton" type="button" aria-label="Send message">↵</button>
+        </div>
+      </div>
+      <div class="action-card">
+        <div class="card-title">QUICK AI ACTIONS</div>
+        <button class="action-btn" type="button" data-action-msg="Bank reconciliation started">⟳ Rapprocher avec IA</button>
+        <button class="action-btn" type="button" data-action-msg="Forecast generated">🔮 Prédire mois prochain</button>
+        <button class="action-btn" type="button" data-action-msg="VAT report ready">🧾 Générer TVA</button>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <span>© 2026 H4CK-COM :: Moroccan AI Accounting</span>
+    <span class="footer-meta">[ predictions are not financial advice ]</span>
+  </footer>
 </div>
+
 <script src="../js/dashboard.js" defer></script>
 </body>
 </html>
